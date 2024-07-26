@@ -30,7 +30,7 @@ class Player
     return str
   end
 
-  def guess()
+  def guess(mode = "normal")
     puts("Take a guess! (i.e #{Player.color('r')},#{Player.color('b')},#{Player.color('g')},#{Player.color('y')})")
     print("Guess: ")
     pins = get_input()
@@ -39,13 +39,13 @@ class Player
       print("Guess: ")
       pins = get_input()
     end
-    pins = pins.gsub("/\s+/", "").split(',')
+    pins = pins.gsub("/\s+/", "").downcase().split(',')
     return pins
   end
 end
 
 def valid(pins)
-  pins = pins.gsub(/\s+/, "")
+  pins = pins.gsub(/\s+/, "").downcase()
   pins = pins.split(",")
   if pins.length != 4
     return false
