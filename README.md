@@ -4,7 +4,3 @@ This is my solution to the odin project of Mastermind. The file containing the g
 ```
 $mastermind.rb
 ```
-
-TODO:
-- Add limited turns
-- Lose state

@@ -75,13 +75,24 @@ code. \n One player (you or the computer) chooses four colors in a specific oder
     grid = Grid.new()
     grid.create(false)
     player = ComputerPlayer.new()
-    while !grid.win?
+    passed = 0
+    if @turns == 0
+      passed = -1
+    end
+    while !grid.win? && passed < @turns
       grid.render()
       player.update(grid.update(player.randGuess()))
+      if @turns != 0
+        passed += 1
+      end
       sleep(1)
     end
     grid.render()
-    puts("The computer was able to crack your code!")
+    if grid.win?
+      puts("The computer was able to crack your code!")
+    else
+      puts("You were able to beat the computer!")
+    end
   end
 
   def humanPlayer()
@@ -91,16 +102,27 @@ code. \n One player (you or the computer) chooses four colors in a specific oder
     grid = Grid.new()
     grid.create()
     player = Player.new()
-    while !grid.win?
+    passed = 0
+    if @turns == 0
+      passed = -1
+    end
+    while !grid.win? && passed < @turns
       grid.render()
       if @hint
         helper.update(grid.update(player.guess(helper.randGuess(false))))
       else
         grid.update(player.guess())
       end
+      if @turns != 0
+        passed += 1
+      end
     end
     grid.render()
-    puts("You were able to crack the code successfuly!")
+    if grid.win?
+      puts("You were able to crack the code successfuly!")
+    else
+      puts("You ran out of attempts :(")
+    end
   end
 
   def get_input()
