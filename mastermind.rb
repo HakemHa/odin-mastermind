@@ -1,6 +1,8 @@
+require_relative 'grid'
+
 class Game 
   def initialize()
-    @mode = 0
+    @mode = false
   end
 
   def menu()
@@ -26,11 +28,11 @@ class Game
     end
     if ["3", "turn", "on", "off"].include?(input)
       if input == "on"
-        @mode = 1
+        @mode = true
       elsif input == "off"
-        @mode = 0
+        @mode = false
       else
-        @mode = (@mode+1)%2
+        @mode = !@mode
       end
       self.menu()
     end
