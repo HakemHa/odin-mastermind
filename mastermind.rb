@@ -58,11 +58,11 @@ class Game
 
   def computerPlayer()
     grid = Grid.new()
-    grid.create(true)
+    grid.create(false)
     player = ComputerPlayer.new()
     while !grid.win?
       grid.render()
-      player.update(grid.update(player.guess()))
+      player.update(grid.update(player.randGuess()))
     end
     grid.render()
     puts("The computer was able to crack your code!")
