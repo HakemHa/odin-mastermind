@@ -4,7 +4,7 @@ require 'io/console'
 class Player
   
   def initialize()
-    @inputs = ['r', 'b', 'g', 'y', 'p', 'o', 'red', 'blue', 'green', 'yellow', 'pink', 'orange']
+    @inputs = ['r', 'b', 'g', 'y', 'p', 'o', 'red', 'blue', 'green', 'yellow', "pink", 'orange']
     
   end
 

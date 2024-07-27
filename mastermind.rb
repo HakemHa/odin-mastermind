@@ -23,7 +23,10 @@ class Game
       self.play()
     end
     if ["2", "instructions", "tutorial"].include?(input)
-      puts("Rules of Mastermind")
+      puts("Rules of Mastermind:")
+      print("The objective of Mastermind is to guess a secret code consisting of a series of 4
+colored pegs. Each guess results in feedback narrowing down the possibilities of the
+code. \n One player (you or the computer) chooses four colors in a specific oder, the other player tries to decipher that code by sequentialy guessing a possible solution. \n After each guess the player deciphering the code receives black and white pegs:\n\n  -A white pegs means the combination guessed has a correct color in it's correct position. \n\n  -A black peg means the combination guessed has a correct color placed in the incorrect position.\n\n\n")
       self.menu()
     end
     if ["3", "turn", "on", "off"].include?(input)

@@ -2,7 +2,7 @@ require_relative 'player'
 
 class ComputerPlayer < Player
   def initialize()
-    @inputs = ["r", "b", "g", "y", "o", "p"]
+    super
     @space = []
     self.generate(0, [])
   end
@@ -30,7 +30,8 @@ class ComputerPlayer < Player
       prettyGuess = prettyGuess[0, prettyGuess.length-1]
       puts("Guess: #{prettyGuess}")
     end
-    return @space[i]
+    ans = @space[i].map {|c| c[0]}
+    return ans
   end
 
   def update(state)
