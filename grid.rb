@@ -27,6 +27,7 @@ class Grid
 
     dots = ['⚪', '⚫']
 
+    print("\n")
     for guess, pins in @board
       prettyGuess = ""
       for g in guess

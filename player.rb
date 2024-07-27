@@ -30,7 +30,7 @@ class Player
     return str
   end
 
-  def guess(mode = 0)
+  def guess(mode = false)
     puts("Take a guess! (i.e #{Player.color('r')},#{Player.color('b')},#{Player.color('g')},#{Player.color('y')})")
     print("Guess: ")
     pins = get_input()
