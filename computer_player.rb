@@ -19,9 +19,14 @@ class ComputerPlayer < Player
     return
   end
 
-  def guess()
-    print(@space.length, "\n")
+  def randGuess()
     i = 0 + (@space.length*rand()).to_i
+    guess = @space[i].join(',')
+    prettyGuess = ""
+    for word in guess.split(',')
+      prettyGuess += Player.color(word) +','
+    end
+    puts("Guess: #{prettyGuess}")
     return @space[i]
   end
 
