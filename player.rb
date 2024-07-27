@@ -40,6 +40,7 @@ class Player
       pins = get_input()
     end
     pins = pins.gsub("/\s+/", "").downcase().split(',')
+    pins = pins.map {|p| p[0]}
     return pins
   end
 end
