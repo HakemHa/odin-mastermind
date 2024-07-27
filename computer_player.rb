@@ -50,7 +50,7 @@ class ComputerPlayer < Player
     hComb = Hash.new(0)
     white = 0
     black = 0
-    for i in 0..4
+    for i in 0...4
       hGuess[guess[i]] += 1
       hComb[comb[i]] += 1
       if guess[i] == comb[i]
