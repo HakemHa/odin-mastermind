@@ -6,7 +6,5 @@ $mastermind.rb
 ```
 
 TODO:
-- Add random example everytime
-- Add tutorial section in main
 - Add limited turns
 - Lose state

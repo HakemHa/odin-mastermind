@@ -3,16 +3,18 @@ require_relative 'grid'
 class Game 
   def initialize()
     @hint = false
+    @turns = 8
   end
 
   def menu()
     input = ""
-    while !["1", "2", "3", "play", "instructions", "tutorial", "turn", "on", "off"].include?(input)
+    while !["1", "2", "3", "play", "instructions", "tutorial", "turn", "on", "off", "4", "number"].include?(input)
       print("Welcome to Mastermind! What would you like to do?", "\n")
       print("\n")
       print("1-Play", "\n")
       print("2-Instructions", "\n")
       print("3-Turn #{@hint ? "off" : "on"} hint mode", "\n")
+      print("4-Number of turns: #{@turns}", "\n")
       input = gets.chomp.downcase().gsub(/\s+/, "")
       print("\n")
       if input == ""
@@ -37,6 +39,14 @@ code. \n One player (you or the computer) chooses four colors in a specific oder
       else
         @hint = !@hint
       end
+      self.menu()
+    end
+    if ["4", "number"].include?(input)
+      nturns = get_input()
+      while nturns == ""
+        nturns = get_input()
+      end
+      @turns = nturns.to_i
       self.menu()
     end
   end
@@ -91,6 +101,30 @@ code. \n One player (you or the computer) chooses four colors in a specific oder
     end
     grid.render()
     puts("You were able to crack the code successfuly!")
+  end
+
+  def get_input()
+    print("\r".ljust(80),"\r", "Number of turns (0 is unlimited turns): ")
+    c = STDIN.getch
+    if (c.ord >= '0'.ord && c.ord <= '9'.ord)
+      ans = c
+    else
+      ans = ""
+    end
+    while c.ord != 13
+      if c.ord == 3
+        exit!
+      end
+      print("\r".ljust(80),"\r", "Number of turns (0 is unlimited turns): #{ans}")
+      c = STDIN.getch
+      if (c.ord >= '0'.ord && c.ord <= '9'.ord)
+        ans += c
+      elsif c.ord == 127 && ans.length > 0
+        ans = ans[0, ans.length-1]
+      end
+    end
+    print("\n")
+    return ans
   end
 end
 

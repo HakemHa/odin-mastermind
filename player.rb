@@ -5,7 +5,6 @@ class Player
   
   def initialize()
     @inputs = ['r', 'b', 'g', 'y', 'p', 'o', 'red', 'blue', 'green', 'yellow', "pink", 'orange']
-    
   end
 
   def self.color(str)
@@ -55,44 +54,43 @@ class Player
     pins = pins.map {|p| p[0]}
     return pins
   end
-end
-
-def valid(pins)
-  pins = pins.gsub(/\s+/, "").downcase()
-  pins = pins.split(",")
-  if pins.length != 4
-    return false
-  end
-  for pin in pins
-    if !(@inputs.include?(pin))
+  def valid(pins)
+    pins = pins.gsub(/\s+/, "").downcase()
+    pins = pins.split(",")
+    if pins.length != 4
       return false
     end
+    for pin in pins
+      if !(@inputs.include?(pin))
+        return false
+      end
+    end
+    return true
   end
-  return true
-end
-
-def get_input()
-  c = STDIN.getch
-  ans = c
-  while c.ord != 13
-    if c.ord == 3
-      exit!
-    end
-    prettyAns = ""
-    for word in ans.split(',')
-      prettyAns += Player.color(word) +','
-    end
-    if ans[ans.length-1] != ','
-      prettyAns = prettyAns[0, prettyAns.length-1]
-    end
-    print("\r".ljust(80),"\r", "Guess: #{prettyAns}")
+  
+  def get_input()
     c = STDIN.getch
-    if (c.ord >= 'a'.ord && c.ord <= 'z'.ord) || (c.ord >= 'A'.ord && c.ord <= 'Z'.ord) || (c.ord == ",".ord)
-      ans += c
-    elsif c.ord == 127 && ans.length > 0
-      ans = ans[0, ans.length-1]
+    ans = c
+    while c.ord != 13
+      if c.ord == 3
+        exit!
+      end
+      prettyAns = ""
+      for word in ans.split(',')
+        prettyAns += Player.color(word) +','
+      end
+      if ans[ans.length-1] != ','
+        prettyAns = prettyAns[0, prettyAns.length-1]
+      end
+      print("\r".ljust(80),"\r", "Guess: #{prettyAns}")
+      c = STDIN.getch
+      if (c.ord >= 'a'.ord && c.ord <= 'z'.ord) || (c.ord >= 'A'.ord && c.ord <= 'Z'.ord) || (c.ord == ",".ord)
+        ans += c
+      elsif c.ord == 127 && ans.length > 0
+        ans = ans[0, ans.length-1]
+      end
     end
+    print("\n")
+    return ans
   end
-  print("\n")
-  return ans
 end
