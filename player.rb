@@ -30,8 +30,20 @@ class Player
     return str
   end
 
-  def guess(mode = false)
-    puts("Take a guess! (i.e #{Player.color('r')},#{Player.color('b')},#{Player.color('g')},#{Player.color('y')})")
+  def guess(example = [])
+    if example.length == 0
+      idxs = []
+      4.times do
+        idxs.append(0+(@inputs.length*rand()).to_i)
+      end
+      example = idxs.map {|i| @inputs[i]}
+    end
+    prettyExample = ""
+    for exp in example
+      prettyExample += Player.color(exp) + ","
+    end
+    prettyExample = prettyExample[0, prettyExample.length-1]
+    puts("Take a guess! (i.e #{prettyExample})")
     print("Guess: ")
     pins = get_input()
     while !valid(pins)

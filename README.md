@@ -8,5 +8,4 @@ $mastermind.rb
 TODO:
 - Add random example everytime
 - Add tutorial section in main
-- Turn on/off hints
 - Add limited turns

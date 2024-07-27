@@ -2,7 +2,7 @@ require_relative 'grid'
 
 class Game 
   def initialize()
-    @mode = false
+    @hint = false
   end
 
   def menu()
@@ -12,7 +12,7 @@ class Game
       print("\n")
       print("1-Play", "\n")
       print("2-Instructions", "\n")
-      print("3-Turn #{@mode ? "off" : "on"} hint mode", "\n")
+      print("3-Turn #{@hint ? "off" : "on"} hint mode", "\n")
       input = gets.chomp.downcase().gsub(/\s+/, "")
       print("\n")
       if input == ""
@@ -28,11 +28,11 @@ class Game
     end
     if ["3", "turn", "on", "off"].include?(input)
       if input == "on"
-        @mode = true
+        @hint = true
       elsif input == "off"
-        @mode = false
+        @hint = false
       else
-        @mode = !@mode
+        @hint = !@hint
       end
       self.menu()
     end
@@ -72,12 +72,19 @@ class Game
   end
 
   def humanPlayer()
+    if @hint
+      helper = ComputerPlayer.new()
+    end
     grid = Grid.new()
     grid.create()
     player = Player.new()
     while !grid.win?
       grid.render()
-      grid.update(player.guess(@mode))
+      if @hint
+        helper.update(grid.update(player.guess(helper.randGuess(false))))
+      else
+        grid.update(player.guess())
+      end
     end
     grid.render()
     puts("You were able to crack the code successfuly!")
