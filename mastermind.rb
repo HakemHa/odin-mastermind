@@ -65,6 +65,7 @@ class Game
     while !grid.win?
       grid.render()
       player.update(grid.update(player.randGuess()))
+      sleep(1)
     end
     grid.render()
     puts("The computer was able to crack your code!")
